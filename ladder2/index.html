@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+    img {
+        opacity: 0.5;
+    }
+
+    img:hover {
+        opacity: 1.0;
+    }
+</style>
+<head>
+    <title>MY WEBPAGE</title>
+    <script src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <h1>Eric Chang's website</h1>
+    <p>Welcome to my website.</p>
+    <div id = 'add-btn' class="btn btn-default btn-danger">New Image</div>
+    <div id = 'big-btn' class="btn btn-primary">Bigger</div>
+    <div id = 'smaller-btn' class="btn btn-default">Smaller</div>
+    <h1>IMAGE GALLERY</h1>
+
+    <div id = 'gallery'>
+    </div>
+</body>
+<script type="text/javascript">
+    var imageUrls = [];
+    var heights = 200;
+    for (var i = 0; i < 10; i++) {
+        imageUrls.push("http://thecatapi.com/api/images/get?image_id=" + i.toString() + "sm");
+    }
+    function clickButton() {
+        $('#add-btn').click(function() {
+            var url = prompt("Please enter your URL", "");
+            if (url != null) {
+                addImageToGallery(url);
+            }
+        });
+    }
+    function addImageToGallery(url) {
+        var img = document.createElement('img');
+        var a = document.createElement('a');
+        $(img).attr('src', url);
+        $(img).css('height', heights);
+        $(a).attr('href', 'http://pbl.link/rickroll');
+        $(a).append(img);
+        $('#gallery').prepend(a);
+
+    }
+
+    function respondToSize() {
+        $('#big-btn').click(function() {
+            heights = heights * 1.1;
+            resizeImage();
+        });
+        $('#smaller-btn').click(function() {
+            heights = heights * 0.9;
+            resizeImage();
+        });
+    }
+
+    function resizeImage() {
+        $('img').each(function() {
+            $(this).css('height', heights)
+        });
+    }
+
+    $(document).ready(function() {
+        //create cat image gallery
+        for (var i = 0; i < imageUrls.length; i++) {
+            addImageToGallery(imageUrls[i])
+        }
+        clickButton()
+        respondToSize()
+    });
+</script>
+</html>
