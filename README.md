@@ -1,3 +1,7 @@
 # wd-ladder
 
 ERIC 10/19/2015
+
+#CHECK OFF
+RUNG 1 - ERIC
+RUNG 2 - ERIC
